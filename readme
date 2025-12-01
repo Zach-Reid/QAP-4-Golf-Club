@@ -1,0 +1,38 @@
+This is a Spring Boot API for managing members of a golf club and their tournaments. The API supports member and tournament creation, searching, and registering members to tournaments. 
+
+Supported APIs:
+
+Members:
+| Endpoint          | Method | Description      | Query Params / Body                                                                       |
+| ----------------- | ------ | ---------------- | ----------------------------------------------------------------------------------------- |
+| `/members`        | `POST` | Add a new member | JSON body: `{ "name", "address", "email", "phone", "membershipStart", "durationMonths" }` |
+| `/members/{id}`   | `GET`  | Get member by ID | Path variable: `id`                                                                       |
+| `/members`        | `GET`  | Get all members  | None                                                                                      |
+| `/members/search` | `GET`  | Search members   | Optional query params: `name`, `phone`, `membershipStart` (ISO date, e.g., 2025-01-01)    |
+
+
+Tournaments:
+| Endpoint                                          | Method | Description                       | Query Params / Body                                                            |
+| ------------------------------------------------- | ------ | --------------------------------- | ------------------------------------------------------------------------------ |
+| `/tournaments`                                    | `POST` | Add a new tournament              | JSON body: `{ "startDate", "endDate", "location", "entryFee", "prizeAmount" }` |
+| `/tournaments/{id}`                               | `GET`  | Get tournament by ID              | Path variable: `id`                                                            |
+| `/tournaments`                                    | `GET`  | Get all tournaments               | None                                                                           |
+| `/tournaments/{tournamentId}/register/{memberId}` | `POST` | Register a member to a tournament | Path variables: `tournamentId`, `memberId`                                     |
+| `/tournaments/{id}/members`                       | `GET`  | Get all members in a tournament   | Path variable: `id`                                                            |
+| `/tournaments/search`                             | `GET`  | Search tournaments                | Optional query params: `start` (ISO date), `location`                          |
+
+
+To run in Docker, have Docker installed to your computer, then use "docker compose up --build" in the terminal. You can use Postman for testing the APIs. To connect the API to an RDS database, create a PostgreSQL database on the AWS (Enable public access if the RDS you're using needs it for local testing) and save the endpoint (DNS name for the instance), username and password. Update the application.properties file, changing:
+<RDS_ENDPOINT> to your RDS hostname
+<DB_NAME> to the database name
+<USERNAME> to the username you saved earlier
+<PASSWORD> to the password you saved earlier
+
+spring.datasource.url=jdbc:postgresql://<RDS_ENDPOINT>:5432/<DB_NAME>
+spring.datasource.username=<USERNAME>
+spring.datasource.password=<PASSWORD>
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+
+
