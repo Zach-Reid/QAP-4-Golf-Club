@@ -1,0 +1,11 @@
+com\golfclub\api\model\Member.class
+com\golfclub\api\GolfClubApplication.class
+com\golfclub\api\controller\TournamentController.class
+com\golfclub\api\repository\spec\MemberSpecs.class
+com\golfclub\api\controller\MemberController.class
+com\golfclub\api\repository\MemberRepository.class
+com\golfclub\api\model\Tournament.class
+com\golfclub\api\repository\spec\TournamentSpecs.class
+com\golfclub\api\repository\TournamentRepository.class
+com\golfclub\api\service\MemberService.class
+com\golfclub\api\service\TournamentService.class
